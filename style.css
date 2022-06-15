@@ -1,0 +1,21 @@
+#fN,#lN,#email,#contact{
+    width:20%;
+    border: none;
+    border-bottom: 1px solid;
+}
+#fN:hover{
+   transition: 2s ease !important;
+    width: 100%;
+}
+#lN:hover{
+   transition: 2s ease !important;
+    width: 100%;
+}
+#email:hover{
+   transition: 2s ease !important;
+    width: 100%;
+}
+#contact:hover{
+   transition: 2s ease !important;
+    width: 100%;
+}

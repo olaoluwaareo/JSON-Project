@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register  page</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <table class="table table-bordered">
+        <tr>
+            <td colspan="2"><h2 class="card-header text-center">Application form</h2></td>
+        </tr>
+        <tr>
+          
+            <td colspan="2" class="form-floating">
+                <input type="text" name="" id="fN"  placeholder="enter your first name" class="form-control">
+                <label for="">Firstname</label>
+            </td>
+        </tr>
+        <tr>
+            
+            <td colspan="2" class="form-floating">
+                <input type="text" name="" id="lN" class="form-control" placeholder="Lastname">
+                <label for="">Lastname</label>
+            </td>
+        </tr>
+        <tr>
+            
+            <td colspan="2" class="form-floating">
+                <input type="email" name="" id="email" class="form-control" placeholder="Email">
+                <label for="">Email Address</label>
+            </td>
+        </tr>
+        
+        <tr >
+            <td ><button onclick="submit()" class="btn btn-primary w-10">Submit</button></td>
+            <td ><button onclick="disp()" class="btn btn-primary w-10">Show Applicant list</button></td>
+        </tr>
+        <tr>
+            <td ><button onclick="pre()" class="btn btn-danger w-10">Previous</button></td>
+            <td ><button onclick="nex()" class="btn btn-danger w-10">Next</button></td>
+        </tr>
+    </table>
+    <table class="table" id="result">
+       
+    </table>
+    <script>
+        ind = -1
+        let allUsers = [];
+        ki = ""
+        function submit() {
+            if (localStorage.pp != null) {
+                allUsers = JSON.parse(localStorage.getItem("pp"));
+            }
+            let people = { "firstName": fN.value, "lastName": lN.value, "email": email.value};
+            allUsers.push(people);
+            spp = JSON.stringify(allUsers);
+            localStorage.setItem("pp", spp);
+            alert("Registration successful")
+        }
+        function disp() {
+            allUsers = JSON.parse(localStorage.getItem("pp"))
+            
+            ki = "<table class='table table-striped table-bordered'>"
+                    ki += "<thead>"
+                        ki += "<th>" + "S/N" + "</th>"
+                        ki += "<th>" + "first Name" + "</th>"
+                        ki += "<th>" + "Last Name" + "</th>"
+                        ki += "<th>" + "E-mail Account" + "</th>"
+                        ki += "<th>" + "Contact" + "</th>"
+                    ki += "</thead>"
+                   
+                   for (i=0; i < allUsers.length; i++) {
+                        ki += "<tr>"
+                            ki += "<td>" + (i+1) + "</td>" + "<td>" + allUsers[i].firstName + "</td>" + "<td>" + allUsers[i].lastName + "<br>" + "</td>" + "<td>" + allUsers[i].email + "</td>" + "<td>" +  "</td>"
+                        ki += "</tr>"
+                }
+            ki += "</table>"
+            result.innerHTML = ki
+        }
+        function pre() {
+            allUsers = JSON.parse(localStorage.getItem("pp"));
+            ind--;
+            if (ind < 1) {
+                ind = 0
+            }
+            ki = "<table border=1>"
+                ki += "<thead>"
+                        ki += "<th>" + "S/N" + "</th>"
+                        ki += "<th>" + "first Name" + "</th>"
+                        ki += "<th>" + "Last Name" + "</th>"
+                        ki += "<th>" + "E-mail Account" + "</th>"
+                        ki += "<th>" + "Contact" + "</th>"
+                ki += "</thead>"
+                ki += "<tr>"
+                    ki += "<td>" + ind + "</td>"
+                    ki += "<td>" + allUsers[ind].firstName + "</td>"
+                    ki += "<td>" + allUsers[ind].lastName + "<br>" + "</td>"
+                    ki += "<td>" + allUsers[ind].email + "</td>"
+                   
+                ki += "</tr>"
+            ki += "</table>"
+            result.innerHTML = ki
+        }
+        function nex() {
+            allUsers = JSON.parse(localStorage.getItem("pp"));
+            total = (allUsers.length)-1
+            ind++;
+            if (ind >= total) {
+                ind=total
+            }
+            ki = "<table border=1>"
+                ki += "<thead>"
+                        ki += "<th>" + "S/N" + "</th>"
+                        ki += "<th>" + "first Name" + "</th>"
+                        ki += "<th>" + "Last Name" + "</th>"
+                        ki += "<th>" + "E-mail Account" + "</th>"
+                        ki += "<th>" + "Contact" + "</th>"
+                ki += "</thead>"
+                ki += "<tr>"
+                    ki += "<td>" + ind + "</td>"
+                    ki += "<td>" + allUsers[ind].firstName + "</td>"
+                    ki += "<td>" + allUsers[ind].lastName + "<br>" + "</td>"
+                    ki += "<td>" + allUsers[ind].email + "</td>"
+                   
+                ki += "</tr>"
+            ki += "</table>"
+            result.innerHTML = ki;
+
+        }
+    </script>
+</body>
+
+</html>
